@@ -1,6 +1,6 @@
 import type React from "react";
 import { createContext, useContext, useEffect, useState } from "react";
-import { type AuthUser, onAuthStateChange } from "@/lib/auth";
+import { type AuthUser, getCurrentUser, onAuthStateChange } from "@/lib/auth";
 
 interface AuthContextType {
   user: AuthUser | null;
@@ -21,6 +21,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(false);
     });
 
+    // Check session validity periodically (every 5 minutes)
+    const checkInterval = setInterval(async () => {
+      const { user: validatedUser } = await getCurrentUser();
+      setUser((currentUser) => {
+        // If we think we're logged in (currentUser exists) but server says no (validatedUser is null), log out
+        if (currentUser && !validatedUser) {
+          return null;
+        }
+        return currentUser;
+      });
+    }, 5 * 60 * 1000);
+
     // Set a timeout to ensure we don't stay in loading state forever
     const timeout = setTimeout(() => {
       setIsLoading(false);
@@ -28,9 +40,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     return () => {
       clearTimeout(timeout);
+      clearInterval(checkInterval);
       subscription?.unsubscribe();
     };
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const value: AuthContextType = {
     user,

@@ -13,6 +13,7 @@ interface UserStats {
 
 /**
  * Hook to fetch and manage user game stats and wallet data
+ * Auto-creates account/wallet/game_stats for existing users without them
  */
 export function useUserStats(): UserStats {
   const { user } = useAuth();
@@ -31,7 +32,9 @@ export function useUserStats(): UserStats {
       setIsLoading(true);
       setError(null);
 
-      // First get the account ID for the current user
+      // First get or create the account for the current user
+      let accountId: string;
+      
       const { data: account, error: accountError } = await supabase
         .from("accounts")
         .select("id")
@@ -39,39 +42,101 @@ export function useUserStats(): UserStats {
         .single();
 
       if (accountError) {
-        // Account doesn't exist yet - that's OK for new users
         if (accountError.code === "PGRST116") {
-          setIsLoading(false);
-          return;
+          // Account doesn't exist - create it
+          console.log("[useUserStats] Creating account for user:", user.id);
+          const { data: newAccount, error: createError } = await supabase
+            .from("accounts")
+            .insert({
+              auth_id: user.id,
+              email: user.email || "",
+              role: "player",
+            })
+            .select("id")
+            .single();
+
+          if (createError) {
+            console.error("[useUserStats] Failed to create account:", createError);
+            throw createError;
+          }
+          accountId = newAccount.id;
+          console.log("[useUserStats] Account created:", accountId);
+        } else {
+          throw accountError;
         }
-        throw accountError;
+      } else {
+        accountId = account.id;
       }
 
-      // Fetch game stats
+      // Fetch or create game stats
+      let statsData: GameStats | null = null;
       const { data: stats, error: statsError } = await supabase
         .from("game_stats")
         .select("*")
-        .eq("account_id", account.id)
+        .eq("account_id", accountId)
         .single();
 
-      if (statsError && statsError.code !== "PGRST116") {
-        throw statsError;
-      }
-      setGameStats(stats);
+      if (statsError && statsError.code === "PGRST116") {
+        // Create default game stats
+        console.log("[useUserStats] Creating game_stats for account:", accountId);
+        const { data: newStats, error: createStatsError } = await supabase
+          .from("game_stats")
+          .insert({
+            account_id: accountId,
+            eggs: 0,
+            hp: 100,
+            max_hp: 100,
+            mp: 50,
+            max_mp: 50,
+            xp: 0,
+          })
+          .select("*")
+          .single();
 
-      // Fetch wallet
-      const { data: walletData, error: walletError } = await supabase
+        if (createStatsError) {
+          console.error("[useUserStats] Failed to create game_stats:", createStatsError);
+        } else {
+          statsData = newStats;
+        }
+      } else if (!statsError) {
+        statsData = stats;
+      }
+      setGameStats(statsData);
+
+      // Fetch or create wallet
+      let walletData: Wallet | null = null;
+      const { data: walletResult, error: walletError } = await supabase
         .from("wallets")
         .select("*")
-        .eq("account_id", account.id)
+        .eq("account_id", accountId)
         .single();
 
-      if (walletError && walletError.code !== "PGRST116") {
-        throw walletError;
+      if (walletError && walletError.code === "PGRST116") {
+        // Create default wallet
+        console.log("[useUserStats] Creating wallet for account:", accountId);
+        const { data: newWallet, error: createWalletError } = await supabase
+          .from("wallets")
+          .insert({
+            account_id: accountId,
+            coins: 0,
+            gems: 0,
+            stars: 0,
+          })
+          .select("*")
+          .single();
+
+        if (createWalletError) {
+          console.error("[useUserStats] Failed to create wallet:", createWalletError);
+        } else {
+          walletData = newWallet;
+        }
+      } else if (!walletError) {
+        walletData = walletResult;
       }
       setWallet(walletData);
 
     } catch (err) {
+      console.error("[useUserStats] Error:", err);
       setError(err instanceof Error ? err.message : "Failed to fetch stats");
     } finally {
       setIsLoading(false);
@@ -90,4 +155,3 @@ export function useUserStats(): UserStats {
     refetch: fetchStats,
   };
 }
-
