@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { signUp } from "@/lib/auth";
 import { IconMail, IconLock, IconArrowRight } from "@tabler/icons-react";
+import { Viewport } from "@/components/Viewport";
 
 export default function SignUp() {
   const [, setLocation] = useLocation();
@@ -40,15 +41,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center px-4">
-      {/* Animated background blobs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
-      </div>
-
-      <div className="relative z-10 w-full max-w-md">
+    <Viewport contentClassName="w-full max-w-md">
         {/* Frosted glass card */}
         <div className="backdrop-blur-xl bg-white/10 dark:bg-black/20 rounded-2xl border border-white/20 dark:border-white/10 p-8 shadow-2xl">
           <div className="mb-8">
@@ -154,7 +147,6 @@ export default function SignUp() {
             </p>
           </div>
         </div>
-      </div>
-    </div>
+    </Viewport>
   );
 }
