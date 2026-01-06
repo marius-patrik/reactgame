@@ -82,6 +82,25 @@ bun seed            # Seed database
 bun seed:clear      # Clear seed data
 ```
 
+## 🗄️ Database Commands (VS Code Tasks)
+
+```bash
+# Run via VS Code: Ctrl/Cmd+Shift+P → "Tasks: Run Task"
+db: push schema      # Push pending migrations to Supabase
+db: run migrations   # Run all pending migrations (--include-all)
+db: pull schema      # Pull remote schema to local
+db: generate types   # Generate TypeScript types from schema
+db: reset local      # Reset local database
+db: create migration # Create new migration file
+```
+
+### Running Migrations
+
+1. Create migration: `supabase/migrations/XXX_name.sql`
+2. Run via VS Code task: `db: push schema` or `db: run migrations`
+3. Or via terminal: `npx supabase db push`
+
+
 ## 📝 Common Patterns
 
 ### Page Component

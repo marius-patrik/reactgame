@@ -102,6 +102,18 @@
       }
     },
     {
+      "label": "db: run migrations",
+      "type": "shell",
+      "command": "npx",
+      "args": ["supabase", "db", "push", "--include-all"],
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": true,
+        "panel": "shared"
+      }
+    },
+    {
       "label": "db: pull schema",
       "type": "shell",
       "command": "npx",
