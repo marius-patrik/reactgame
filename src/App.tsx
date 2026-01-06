@@ -2,6 +2,7 @@ import { Router, Route, useLocation, Redirect, Switch } from "wouter";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Login from "@/pages/Login";
@@ -15,14 +16,7 @@ function AppContent() {
   const isAuthPage = location === "/login" || location === "/signup";
 
   if (isLoading) {
-    return (
-      <div className="h-screen w-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto mb-4" />
-          <p className="text-muted-foreground">Loading...</p>
-        </div>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (
