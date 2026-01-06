@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { AuthUser, onAuthStateChange } from "@/lib/auth";
+import type React from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { type AuthUser, onAuthStateChange } from "@/lib/auth";
 
 interface AuthContextType {
   user: AuthUser | null;

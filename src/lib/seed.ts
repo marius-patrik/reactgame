@@ -1,4 +1,4 @@
-import { supabase } from "./supabase";
+// import { supabase } from "./supabase"; // Uncomment when implementing seed functions
 
 /**
  * Seed the database with initial data

@@ -1,2 +1,2 @@
 // Utility functions for UI components
-export { cn } from "./utils";
+export { cn } from "./cn";
