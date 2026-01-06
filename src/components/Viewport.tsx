@@ -2,7 +2,6 @@ import type React from "react";
 import { cn } from "@/lib/cn";
 import { AnimatedBackground } from "./AnimatedBackground";
 import { Header } from "./Header";
-import { Footer } from "./Footer";
 import { Hotbar } from "./Hotbar";
 
 interface ViewportProps {
@@ -33,11 +32,8 @@ export function Viewport({ children, className, contentClassName }: ViewportProp
         </div>
       </div>
 
-      {/* Hotbar (Floating above footer) */}
-      <Hotbar className="z-50 bottom-24" />
-
-      {/* Footer (Stats - Bottom) */}
-      <Footer />
+      {/* Hotbar (Footer with Stats) */}
+      <Hotbar className="z-50 bottom-6" />
     </div>
   );
 }
