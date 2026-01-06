@@ -1,0 +1,47 @@
+# 📋 Feature PRD
+
+Feature requirements document. Create `FEATURE_PRD_<name>` for each significant feature.
+
+**Status**: ⚪ Not Started | 🟡 In Progress | 🔄 In Review | ✅ Done
+
+---
+
+## 🎯 Overview
+
+<!-- Brief description of the feature -->
+
+---
+
+## 🎨 Goals
+
+<!-- What this feature aims to achieve -->
+
+---
+
+## 👤 User Stories
+
+<!-- Format: "As a [user], I want [goal] so that [benefit]" -->
+
+---
+
+## ⚙️ Technical Requirements
+
+<!-- Implementation details and constraints -->
+
+---
+
+## ✅ Acceptance Criteria
+
+<!-- Specific, testable conditions for "done" -->
+
+- [ ] 
+- [ ] 
+- [ ] 
+
+---
+
+## ❓ Open Questions
+
+<!-- Items needing clarification -->
+
+---

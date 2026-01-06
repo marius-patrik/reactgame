@@ -1,0 +1,21 @@
+// This file provides shadcn/ui configuration
+// Components will be installed to src/components/ui/
+
+import { basename, join } from "path";
+import { readFileSync } from "fs";
+
+export const getConfig = () => {
+  return {
+    $schema: "https://ui.shadcn.com/schema.json",
+    style: "default",
+    rsc: false,
+    tsx: true,
+    aliases: {
+      "@": "./src",
+      "@/components": "./src/components",
+      "@/ui": "./src/components/ui",
+      "@/lib": "./src/lib",
+      "@/pages": "./src/pages",
+    },
+  };
+};

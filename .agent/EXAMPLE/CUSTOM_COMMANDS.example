@@ -1,0 +1,23 @@
+# Custom Commands
+
+Project-specific commands that supplement `.agent/GENERAL/COMMANDS`.
+
+## Command Format
+
+```markdown
+### `commandname:` or `:commandname`
+
+**Action**: What the command does
+
+**Parameters** (if applicable):
+- **name**: Description
+
+**Process**:
+1. Step 1
+2. Step 2
+
+**Example**: `commandname: example`
+```
+
+---
+

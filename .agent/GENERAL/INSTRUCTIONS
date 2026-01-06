@@ -1,0 +1,315 @@
+# Agent Instructions
+
+> **IMPORTANT**: This file contains AI agent-specific instructions and detailed procedures. For fundamental rules, see [RULES](RULES). For command documentation, see [COMMANDS](COMMANDS).
+
+## Agent Folder Structure
+
+The `.agent/` folder contains all agent configuration and documentation:
+
+```
+.agent/
+├── GENERAL/          # General rules (always apply)
+│   ├── RULES         # Fundamental rules
+│   ├── INSTRUCTIONS  # Detailed procedures (this file)
+│   ├── COMMANDS      # Command documentation
+│   └── IDE.example   # IDE configuration template
+├── EXAMPLE/          # Templates for LIVE files
+│   ├── PROJECT_GUIDELINES.example
+│   ├── PROGRESS.example
+│   ├── PRODUCT.example
+│   ├── ROADMAP.example
+│   ├── FEATURE_PRD.example
+│   ├── CUSTOM_RULES.example
+│   ├── CUSTOM_INSTRUCTIONS.example
+│   └── CUSTOM_COMMANDS.example
+└── LIVE/             # Workspace-specific files (ignored during init)
+    ├── ROADMAP               # Overall project roadmap and milestones
+    ├── <project_name>/       # Per-project subfolder (when multiple projects exist)
+    │   ├── PROJECT_GUIDELINES
+    │   ├── PROGRESS
+    │   ├── PRODUCT
+    │   └── FEATURE_PRD[_<name>]
+    └── CUSTOM_* (optional)
+```
+
+### Multi-Project Structure
+
+When the root contains **multiple projects** (e.g., monorepo with multiple packages/apps):
+
+1. **Create a subfolder** in `.agent/LIVE/` for each project
+2. **Name the subfolder** after the project (e.g., `@plcl-core`, `docs`)
+3. **Each subfolder contains**:
+   - `PROJECT_GUIDELINES` - Project-specific instructions
+   - `PROGRESS` - Project-specific progress tracking
+   - `PRODUCT` - Project-specific product description
+   - `FEATURE_PRD[_<name>]` - Project-specific feature PRDs
+
+**Example** for a monorepo with multiple packages:
+```
+.agent/LIVE/
+├── ROADMAP                   # Overall roadmap across all projects
+├── @plcl-core/
+│   ├── PROJECT_GUIDELINES
+│   ├── PROGRESS
+│   ├── PRODUCT
+│   └── FEATURE_PRD[_<name>]
+├── @plcl-ui/
+│   ├── PROJECT_GUIDELINES
+│   ├── PROGRESS
+│   ├── PRODUCT
+│   └── FEATURE_PRD[_<name>]
+└── docs/
+    ├── PROJECT_GUIDELINES
+    ├── PROGRESS
+    ├── PRODUCT
+    └── FEATURE_PRD[_<name>]
+```
+
+---
+
+## Workspace Documentation (.agent/LIVE/)
+
+The `.agent/LIVE/` directory contains workspace-specific documentation. These files are **ignored during agent initialization** but should be referenced and maintained during active work.
+
+### Root-Level Files (.agent/LIVE/)
+
+| File      | Purpose                                                                    |
+| --------- | -------------------------------------------------------------------------- |
+| `ROADMAP` | Overall project roadmap, milestones, and cross-project progress tracking   |
+
+### Per-Project Files (.agent/LIVE/<project>/)
+
+| File                 | Purpose                                                                         |
+| -------------------- | ------------------------------------------------------------------------------- |
+| `PROJECT_GUIDELINES` | Project-specific instructions, coding standards, and guidelines to keep in mind |
+| `PROGRESS`           | Track all development tasks, current work, and completed items                  |
+| `PRODUCT`            | Periodically updated product description, vision, and features                  |
+| `FEATURE_PRD`        | Feature-specific PRD created **before** implementing each feature               |
+
+### Initialization
+
+**MANDATORY**: Initialize workspace documentation based on project structure:
+
+#### Single Project (no subfolders needed)
+
+If the root contains a **single project**, copy files directly to `.agent/LIVE/`:
+
+```
+.agent/EXAMPLE/ROADMAP.example            → .agent/LIVE/ROADMAP
+.agent/EXAMPLE/PROJECT_GUIDELINES.example → .agent/LIVE/PROJECT_GUIDELINES
+.agent/EXAMPLE/PROGRESS.example           → .agent/LIVE/PROGRESS
+.agent/EXAMPLE/PRODUCT.example            → .agent/LIVE/PRODUCT
+.agent/EXAMPLE/FEATURE_PRD.example        → .agent/LIVE/FEATURE_PRD
+```
+
+#### Multiple Projects (subfolders required)
+
+If the root contains **multiple projects** (monorepo, multiple packages/apps):
+
+1. **Identify all projects** in the root (packages, apps, libraries)
+2. **Create a subfolder** in `.agent/LIVE/` for each project
+3. **Copy template files** into each project subfolder:
+
+```
+For each project (e.g., @plcl-core, @plcl-ui, docs):
+.agent/EXAMPLE/PROJECT_GUIDELINES.example → .agent/LIVE/<project>/PROJECT_GUIDELINES
+.agent/EXAMPLE/PROGRESS.example           → .agent/LIVE/<project>/PROGRESS
+.agent/EXAMPLE/PRODUCT.example            → .agent/LIVE/<project>/PRODUCT
+.agent/EXAMPLE/FEATURE_PRD.example        → .agent/LIVE/<project>/FEATURE_PRD
+```
+
+**Example initialization for a monorepo:**
+```bash
+# Copy root-level ROADMAP
+cp .agent/EXAMPLE/ROADMAP.example .agent/LIVE/ROADMAP
+
+# Create subfolders for each project
+mkdir -p .agent/LIVE/@plcl-core .agent/LIVE/@plcl-ui .agent/LIVE/docs
+
+# Copy templates to each project folder
+for project in @plcl-core @plcl-ui docs; do
+  cp .agent/EXAMPLE/PROJECT_GUIDELINES.example .agent/LIVE/$project/PROJECT_GUIDELINES
+  cp .agent/EXAMPLE/PROGRESS.example .agent/LIVE/$project/PROGRESS
+  cp .agent/EXAMPLE/PRODUCT.example .agent/LIVE/$project/PRODUCT
+  cp .agent/EXAMPLE/FEATURE_PRD.example .agent/LIVE/$project/FEATURE_PRD
+done
+```
+
+### How to Use Each File
+
+#### Root-Level: ROADMAP
+
+**ROADMAP** - Track overall project direction:
+- High-level milestones and release goals
+- Cross-project dependencies and coordination
+- Overall timeline and priorities
+- **Update**: When milestones are reached or priorities change
+- **Location**: Always at `.agent/LIVE/ROADMAP`
+
+#### Per-Project Files
+
+1. **PROJECT_GUIDELINES** - Store project-specific instructions:
+   - Any instruction the user gives about the project
+   - Coding standards and conventions
+   - Architecture patterns and design decisions
+   - **Update**: Whenever the user provides new project-level instructions
+   - **Multi-project**: Each project has its own guidelines file
+
+2. **PROGRESS** - Track ALL development work (replaces TODO.md):
+   - **Current tasks**: What's being worked on now
+   - **Pending tasks**: What needs to be done next
+   - **Completed tasks**: What has been finished (with dates)
+   - **MANDATORY**: Track all work here unless using `:now` command
+   - **Update**: Before starting work, during work, and after completing work
+   - **Multi-project**: Each project tracks its own progress separately
+   - Status indicators: ⬜ Not started | 🔄 In progress | ✅ Completed | ❌ Cancelled
+
+3. **PRODUCT** - Describe the product:
+   - Product vision and goals
+   - Key features and capabilities
+   - Target users and use cases
+   - **Update**: Periodically as the product evolves
+   - **Multi-project**: Each project has its own product description
+
+4. **FEATURE_PRD** - Document features before implementation:
+   - Feature requirements and specifications
+   - User stories and acceptance criteria
+   - Technical approach and implementation plan
+   - **Create**: A new `FEATURE_PRD_<name>` for every significant feature
+   - **MANDATORY**: Get user approval before proceeding with implementation
+   - **Multi-project**: Place in project subfolder with other project files
+
+### Feature PRD Workflow
+
+**MANDATORY** before implementing any significant feature:
+
+1. Create `FEATURE_PRD_<feature_name>` in appropriate location:
+   - **Single project**: `.agent/LIVE/FEATURE_PRD_<name>`
+   - **Multi-project**: `.agent/LIVE/<project>/FEATURE_PRD_<name>`
+2. Document requirements, goals, and implementation approach
+3. Get user approval on the PRD
+4. Update the PRD as implementation progresses
+5. Mark the feature as complete when done
+
+---
+
+## Session Initialization
+
+**MANDATORY**: At the beginning of every coding session:
+
+1. **Read General Rules**:
+   - `.agent/GENERAL/RULES`
+   - `.agent/GENERAL/INSTRUCTIONS` (this file)
+   - `.agent/GENERAL/COMMANDS`
+
+2. **Read Project Documentation**:
+   - `README.md` for project overview
+   - `.agent/LIVE/ROADMAP` for overall progress and milestones
+
+3. **Initialize Workspace Documentation**:
+   - Check if `.agent/LIVE/` files exist
+   - **Single project**: Copy templates directly to `.agent/LIVE/`
+   - **Multi-project**: Create subfolders for each project and copy templates
+   - If missing, copy from `.agent/EXAMPLE/` templates (see Initialization section above)
+
+4. **Review Workspace Documentation**:
+   - **Single project**: Review files in `.agent/LIVE/`
+   - **Multi-project**: Review files in each `.agent/LIVE/<project>/` subfolder
+   - Review `PROJECT_GUIDELINES` for project-specific instructions
+   - Review `PROGRESS` for current status
+   - Review `PRODUCT` to understand each product
+
+5. **Analyze Codebase**:
+   - Review package structure and organization
+   - Understand architecture and patterns
+   - Review key configuration files
+   - **EXCEPTION**: Files in `.agent/LIVE/` are ignored during initial analysis
+
+6. **Establish Context**:
+   - Understand current project state
+   - Identify patterns and conventions in use
+   - Note recent changes or ongoing work
+
+---
+
+## Task Management
+
+### Progress Tracking
+
+- **MANDATORY**: Track all work in project-specific `PROGRESS` files (unless using `:now` command)
+- **MANDATORY**: Update `.agent/LIVE/ROADMAP` for milestone-level progress
+- Status indicators:
+  - ⬜ Not started
+  - 🔄 In progress
+  - ✅ Completed
+  - ❌ Cancelled
+- Create task entries for complex tasks (3+ steps)
+
+### Planning Before Execution
+
+- Break down complex tasks into actionable steps
+- Identify dependencies between tasks
+- **MANDATORY**: Prompt user with plan before beginning execution
+- Wait for user confirmation before proceeding
+- Update plan if new information is discovered
+
+### PROGRESS File Structure
+
+1. **Current Status** - Overview of where the project stands
+2. **Active Tasks** - Tasks currently in progress (🔄)
+3. **Pending Tasks** - Tasks to be done next (⬜)
+4. **Completed Tasks** - Recently finished work (✅) with dates
+5. **Notes** - Any blockers, decisions, or context
+
+### ROADMAP File Structure
+
+1. **Vision** - Overall project direction
+2. **Milestones** - Major release goals and timelines
+3. **Cross-Project Status** - Progress across all packages
+4. **Upcoming** - Near-term priorities
+
+---
+
+## Quality Assurance Checklist
+
+**MANDATORY** after completing ANY task:
+
+1. **Verify Implementation** - Confirm the feature works as intended
+2. **Run Lint** - Fix ALL linting issues
+3. **Run Build** - Fix ALL build errors
+4. **Test Functionality** - Test edge cases, verify no regressions
+5. **Keep Code Simple** - Refactor if overly complicated
+6. **Update Progress** - Mark task complete in project's `PROGRESS` file
+7. **Update Roadmap** - Update `.agent/LIVE/ROADMAP` if milestone affected
+8. **Update Documentation** - Update all affected documentation
+
+---
+
+## Custom Rules (Optional)
+
+To add project-specific customizations, create files in `.agent/LIVE/`:
+
+- `CUSTOM_RULES` - Project-specific rules
+- `CUSTOM_INSTRUCTIONS` - Project-specific procedures
+- `CUSTOM_COMMANDS` - Project-specific commands
+
+Copy templates from `.agent/EXAMPLE/` if needed. Custom rules supplement but do not replace general rules.
+
+---
+
+## Command Handling
+
+> All command documentation is in [COMMANDS](COMMANDS).
+
+---
+
+## Getting Help
+
+If you encounter issues:
+
+1. Check existing code for similar patterns
+2. Review project examples if available
+3. Check project's `PROGRESS` file for related tasks
+4. Review `PROJECT_GUIDELINES` for project-specific rules
+5. Review [RULES](RULES) for fundamental rules
+6. Follow the quality assurance checklist

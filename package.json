@@ -1,0 +1,40 @@
+{
+  "name": "react-game-project",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "rsbuild dev",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview",
+    "type-check": "tsc --noEmit",
+    "lint": "biome lint src --apply",
+    "format": "biome format src --write",
+    "check": "biome check src",
+    "seed": "bun scripts/seed.ts",
+    "seed:clear": "bun scripts/seed.ts --clear"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "wouter": "^3.1.0",
+    "@supabase/supabase-js": "^2.38.4",
+    "@tabler/icons-react": "^3.10.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.408.0",
+    "tailwind-merge": "^2.2.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@rsbuild/core": "^0.7.0",
+    "@rsbuild/plugin-react": "^0.7.0",
+    "@types/node": "^20.10.6",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "shadcn-ui": "^0.8.0",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  }
+}

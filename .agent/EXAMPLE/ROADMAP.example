@@ -1,0 +1,67 @@
+# 🗺️ Roadmap
+
+Overall project roadmap and cross-project progress tracking.
+
+## Status Icons
+
+- 🟢 On Track
+- 🟡 At Risk
+- 🔴 Blocked
+- ✅ Complete
+- ⏸️ Paused
+
+---
+
+## 🎯 Vision
+
+<!-- High-level project direction and goals -->
+
+---
+
+## 📍 Current Milestone
+
+<!-- Active milestone details -->
+
+**Milestone**: 
+**Status**: 
+**Target Date**: 
+
+### Progress by Package
+
+| Package | Status | Progress |
+|---------|--------|----------|
+| package-1 | 🟢 | 0% |
+| package-2 | 🟢 | 0% |
+
+---
+
+## 🗓️ Milestones
+
+### Milestone 1 - [Name]
+- **Target**: YYYY-MM-DD
+- **Status**: ⬜ Not Started
+- **Goals**:
+  - [ ] Goal 1
+  - [ ] Goal 2
+
+### Milestone 2 - [Name]
+- **Target**: YYYY-MM-DD
+- **Status**: ⬜ Not Started
+- **Goals**:
+  - [ ] Goal 1
+  - [ ] Goal 2
+
+---
+
+## 📋 Cross-Project Dependencies
+
+<!-- Dependencies between packages -->
+
+---
+
+## 📝 Notes
+
+<!-- Important decisions, blockers, or context -->
+
+---
+

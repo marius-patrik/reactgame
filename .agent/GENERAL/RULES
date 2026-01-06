@@ -1,0 +1,155 @@
+# General Agent Rules
+
+> **IMPORTANT**: For detailed procedures, see [INSTRUCTIONS](INSTRUCTIONS). For commands, see [COMMANDS](COMMANDS).
+
+## Core Principles
+
+### 1. Maintain Code Quality
+
+- **NEVER** skip quality checks (lint, build, tests)
+- **ALWAYS** fix issues before marking tasks complete
+- **ALWAYS** verify functionality works as intended
+- **ALWAYS** follow project coding standards
+
+### 2. Update Documentation
+
+- **MANDATORY**: Update documentation when code changes
+- Keep README files current and accurate
+- Update code comments when logic changes
+
+### 3. Track Work
+
+- **MANDATORY**: Track all work in `.agent/LIVE/PROGRESS` or project-specific `PROGRESS` files (except `:now` command)
+- **MANDATORY**: Track overall roadmap in `.agent/LIVE/ROADMAP`
+- Mark tasks complete **ONLY** after all quality checks pass
+- Status: ⬜ → 🔄 → ✅
+
+### 4. Plan Before Executing
+
+- **MANDATORY**: Plan complex tasks (3+ steps) before implementation
+- **MANDATORY**: Prompt user with plan before beginning
+- Wait for user confirmation before proceeding
+
+### 5. Maintain Consistency
+
+- Follow existing code patterns and conventions
+- Consider cross-package dependencies and impacts
+
+---
+
+## Workspace Documentation
+
+### 6. Maintain Workspace Files
+
+- **MANDATORY**: Store project instructions in `.agent/LIVE/PROJECT_GUIDELINES`
+- **MANDATORY**: Track progress in `.agent/LIVE/PROGRESS`
+- **MANDATORY**: Update `.agent/LIVE/PRODUCT` periodically
+- **MANDATORY**: Create `FEATURE_PRD_<name>` before significant features
+- Initialize from `.agent/EXAMPLE/` templates if files don't exist
+- Files in `.agent/LIVE/` are ignored during session initialization
+
+---
+
+## File Analysis
+
+### 7. Analyze Files at Session Start
+
+- **MANDATORY**: Read and analyze all files at the start of every conversation
+- **EXCEPTION**: `.agent/LIVE/` files are ignored during initial analysis
+- Reference `.agent/LIVE/` files during active work
+
+### 8. Review Documentation First
+
+- Review `README.md` before starting work
+- Review `.agent/LIVE/ROADMAP` for overall progress
+- Review `.agent/LIVE/PROGRESS` or project-specific `PROGRESS` files for task status
+- Review `.agent/LIVE/PROJECT_GUIDELINES` for project-specific rules
+
+---
+
+## Code Modification
+
+### 9. Never Break Existing Functionality
+
+- Test changes to ensure no regressions
+- Consider backward compatibility
+- Update dependent code when making breaking changes
+
+### 10. Keep Code Simple
+
+- Prefer simple, readable solutions
+- Refactor when code becomes complicated
+
+### 11. Follow Type Safety
+
+- Use proper TypeScript types (avoid `any`)
+- Fix type errors immediately
+
+---
+
+## Quality Assurance
+
+### 12. Complete Checklist After Every Task
+
+1. Verify implementation works
+2. Run lint - fix ALL issues
+3. Run build - fix ALL errors
+4. Test functionality
+5. Update todos and documentation
+6. Update `.agent/LIVE/PROGRESS`
+
+---
+
+## Command Handling
+
+### 13. Support Command Formats
+
+- Beginning or end: `agent: <msg>` OR `<msg>: agent`
+- Semicolon chaining: `agent: something ; else`
+- See [COMMANDS](COMMANDS) for full documentation
+
+---
+
+## Communication
+
+### 14. Be Clear and Transparent
+
+- Explain what you're doing and why
+- Ask for clarification when requirements are unclear
+
+### 15. Respect User Intent
+
+- Follow user instructions precisely
+- Ask for confirmation before major changes
+
+---
+
+## Error Handling
+
+### 16. Fix Issues Immediately
+
+- Don't leave broken code or failing builds
+- Fix errors before proceeding
+
+### 17. Report Problems Clearly
+
+- Communicate issues encountered
+- Suggest solutions when possible
+
+---
+
+## Security
+
+### 18. Never Commit Sensitive Information
+
+- Don't hardcode API keys or secrets
+- Use environment variables for sensitive data
+
+---
+
+## Summary
+
+✅ Code quality and maintainability  
+✅ Proper documentation and tracking  
+✅ Consistent and predictable behavior  
+✅ Respect for project structure and user intent

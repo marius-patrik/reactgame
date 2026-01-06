@@ -1,0 +1,148 @@
+# 📈 Progress
+
+Track all development tasks for this project. **MANDATORY**: All work must be tracked here unless using `:now` command.
+
+## Status Icons
+
+- ⬜ Not started
+- 🔄 In progress
+- ✅ Completed
+- ❌ Cancelled
+- 🔴 Blocked
+
+---
+
+## 📍 Current Status
+
+<!-- Brief overview of where the project stands -->
+
+### Build Status
+
+| Component | Status | Details |
+|-----------|--------|---------|
+| Project Setup | ✅ | Rsbuild + React + TypeScript + Bun configured |
+| Tailwind CSS | ✅ | Configured with dark mode support |
+| shadcn/ui | ✅ | Ready for component usage |
+| Wouter Routing | ✅ | 3 pages + 404 configured (Home, About, NotFound) |
+| Biomejs Linting | ✅ | Unified linter/formatter active |
+| Supabase Client | ✅ | REACT_APP_* environment variables configured |
+| VS Code Tasks | ✅ | 11 tasks configured (dev, build, lint, format, db, seed) |
+| Database Infrastructure | ✅ | Supabase PostgreSQL integration ready |
+| Seed System | ✅ | Seeding functions and CLI script ready |
+| Production Build | ✅ | 162.9 kB total (53.0 kB gzipped) |
+
+---
+
+## 🎯 Completed Infrastructure Tasks
+
+### Phase 1: Project Setup
+- ✅ Create React 18 + TypeScript project
+- ✅ Configure Rsbuild build tool
+- ✅ Install Bun package manager
+- ✅ Add Tailwind CSS + PostCSS
+- ✅ Integrate shadcn/ui component library
+- ✅ Add Wouter routing
+- ✅ Add Tabler Icons
+- ✅ Configure Supabase client
+- ✅ Add Biomejs linting/formatting
+
+### Phase 2: Development Infrastructure
+- ✅ Create VS Code tasks for dev/build/lint/format/type-check
+- ✅ Create database management tasks (push, pull, generate, reset, view, create)
+- ✅ Create seed system (seedDatabase, clearSeedData functions)
+- ✅ Create seed CLI script with --clear flag
+- ✅ Add npm scripts for all tasks
+- ✅ Configure environment variables (REACT_APP_* format)
+
+### Phase 3: Documentation & Configuration
+- ✅ Write README.md with setup and deployment instructions
+- ✅ Write DATABASE.md with full database workflow
+- ✅ Configure .gitignore, .prettierrc, biome.json, tsconfig.json
+- ✅ Set up .github/copilot-instructions.md with agent rules
+- ✅ Create .agent/GENERAL/ folder structure (from EXAMPLE)
+- ✅ Reset .agent/LIVE/ folder for new project context
+
+---
+
+## 📋 Next Steps (Feature Development)
+
+### Phase 4: Database Schema
+- ⚪ Define game tables schema (users, games, scores, etc.)
+- ⚪ Create Supabase migrations
+- ⚪ Generate TypeScript types from schema
+- ⚪ Document database schema in .agent/LIVE/DATABASE_SCHEMA.md
+
+### Phase 5: Core Game Components
+- ⚪ Create game board component
+- ⚪ Create player management component
+- ⚪ Create score display component
+- ⚪ Create game controls component
+
+### Phase 6: Authentication
+- ⚪ Set up Supabase Auth
+- ⚪ Create login/signup pages
+- ⚪ Implement session management
+- ⚪ Add protected routes
+
+### Phase 7: Game Logic
+- ⚪ Implement core game rules
+- ⚪ Create game state management
+- ⚪ Add multiplayer features (if applicable)
+- ⚪ Implement scoring system
+
+### Phase 8: Polish & Deployment
+- ⚪ Add animations and transitions
+- ⚪ Optimize performance
+- ⚪ Test thoroughly
+- ⚪ Deploy to Vercel
+
+---
+
+## 📜 Progress Log
+
+### 2026 (Latest Session)
+
+**Project Infrastructure Setup Complete**
+
+- ✅ Set up React 18 + TypeScript with Rsbuild
+- ✅ Installed and configured Bun package manager
+- ✅ Added Tailwind CSS with dark mode support
+- ✅ Integrated shadcn/ui component library
+- ✅ Added Wouter lightweight routing (3 pages)
+- ✅ Added Tabler Icons for UI icons
+- ✅ Configured Supabase PostgreSQL client
+- ✅ Set up Biomejs for linting and formatting
+- ✅ Created 11 VS Code tasks for development workflow
+- ✅ Implemented database seeding system
+- ✅ Written comprehensive documentation (README, DATABASE.md)
+- ✅ Reset .agent/ folder for new project context
+
+**Technology Choices**:
+- Rsbuild: Ultra-fast build tool replacing Vite
+- Bun: Fast package manager and runtime
+- Biomejs: Single tool for linting + formatting
+- Wouter: 2KB lightweight router
+- shadcn/ui: Copy-paste component library
+- Supabase: PostgreSQL + Auth + Realtime API
+- Vercel: Optimal deployment platform
+
+**Project Status**:
+- Development server: Ready (`bun dev` or **dev** task)
+- Build: Verified working (162.9 kB total)
+- TypeScript: No errors
+- Linting: Configured with Biomejs
+- Database: Client configured, ready for schema
+- Deployment: Vercel configuration ready
+
+---
+
+## 📝 Notes
+
+- All environment variables use `REACT_APP_*` prefix (Rsbuild/React standard)
+- Project uses Supabase credentials from `.env` file
+- Development server runs on port 3000
+- All VS Code tasks use Bun as package manager (~/.bun/bin/bun)
+- Tabler Icons tested and working (IconCheck, IconLock, IconRocket, IconStar)
+- shadcn/ui components available in `src/components/ui/` directory
+- Database migrations go in `supabase/migrations/` folder
+- Seed functions available for test data population

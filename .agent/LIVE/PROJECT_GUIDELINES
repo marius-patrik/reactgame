@@ -1,0 +1,141 @@
+# 📚 Project Guidelines
+
+Project-specific instructions and standards. Update this file whenever the user provides new project-level instructions.
+
+## Status Icons
+
+- ✅ **Required** - Must follow
+- ⚠️ **Recommended** - Should follow
+- 💡 **Best Practice** - Suggested
+
+---
+
+## 💻 Code Standards
+
+<!-- Add coding conventions and style guidelines -->
+
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   └── ui/           # shadcn/ui components
+├── pages/            # Page components (Home, About, NotFound)
+├── lib/
+│   ├── supabase.ts  # Supabase client
+│   ├── seed.ts      # Database seeding functions
+│   ├── cn.ts        # Tailwind class merge utility
+│   └── utils.ts     # General utilities
+├── App.tsx          # Main app with Wouter routing
+├── main.tsx         # Entry point
+└── globals.css      # Global Tailwind styles
+
+scripts/
+└── seed.ts          # CLI seed script
+```
+
+## 💻 Code Standards
+
+### TypeScript
+
+- ✅ Use TypeScript for all code
+- ✅ Avoid `any` types
+- ✅ Define proper interfaces for component props
+- ✅ Explicit return types on functions
+- ✅ Use `import type` for type-only imports
+
+### React
+
+- ✅ Functional components with hooks only
+- ✅ Component props must be typed
+- ✅ Use `export default` for page components
+- ✅ Import shadcn/ui from `@/components/ui/`
+- ✅ Use Tabler Icons: `import { IconName } from "@tabler/icons-react"`
+- ✅ Support `className` prop for customization
+
+### Styling
+
+- ✅ Tailwind CSS exclusively
+- ✅ Dark mode via CSS variables
+- ✅ Follow shadcn/ui patterns
+- ✅ Use `cn()` from `src/lib/cn.ts` for class merging
+
+## 🗄️ Database Rules
+
+- ✅ Supabase environment vars: `REACT_APP_SUPABASE_*`
+- ✅ Generate types: Run **db: generate types** task
+- ✅ Use `.agent/LIVE/DATABASE_SCHEMA.md` for schema docs
+- ✅ Seed data: `bun seed` or **seed: run** task
+
+## 🚀 Development Commands
+
+```bash
+bun dev              # Start dev server
+bun build           # Build for production
+bun preview         # Preview prod build
+bun lint            # Run Biomejs linter
+bun format          # Format code
+bun check           # Check code quality
+bun type-check      # TypeScript check
+bun seed            # Seed database
+bun seed:clear      # Clear seed data
+```
+
+## 📝 Common Patterns
+
+### Page Component
+
+```typescript
+export default function HomePage() {
+  return (
+    <div className="space-y-4">
+      <h1 className="text-4xl font-bold">Title</h1>
+    </div>
+  );
+}
+```
+
+### Using Supabase
+
+```typescript
+import { supabase } from "@/lib/supabase";
+
+const { data, error } = await supabase
+  .from("table_name")
+  .select("*");
+```
+
+### Using Tabler Icons
+
+```typescript
+import { IconCheck, IconX } from "@tabler/icons-react";
+
+function Component() {
+  return <IconCheck className="w-6 h-6 text-green-500" />;
+}
+```
+
+## VS Code Tasks
+
+Access via Cmd+Shift+P → "Run Task":
+
+- **dev** - Start development server
+- **build** - Build for production
+- **lint** - Run Biomejs linter
+- **format** - Format all code
+- **type-check** - Check TypeScript
+- **db: push schema** - Push schema to Supabase
+- **db: pull schema** - Pull schema from Supabase
+- **db: generate types** - Generate TypeScript types
+- **db: reset local** - Reset local database
+- **seed: run** - Populate test data
+- **seed: clear** - Clear all test data
+
+## 📋 Quality Checklist
+
+Before committing:
+- ✅ Run `bun lint` (fix all issues)
+- ✅ Run `bun type-check` (no TypeScript errors)
+- ✅ Run `bun build` (production build succeeds)
+- ✅ Test in dev mode: `bun dev`
+- ✅ Update `.agent/LIVE/PROGRESS` with changes

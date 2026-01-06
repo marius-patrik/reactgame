@@ -1,0 +1,124 @@
+# 🗺️ Roadmap
+
+Overall project roadmap and cross-project progress tracking.
+
+## Status Icons
+
+- 🟢 On Track
+- 🟡 At Risk
+- 🔴 Blocked
+- ✅ Complete
+- ⏸️ Paused
+
+---
+
+## 🎯 Vision
+
+<!-- High-level project direction and goals -->
+
+---
+
+## 📍 Current Milestone
+
+**Milestone**: v0.1.0 - Core Components Stable
+**Status**: 🟢 On Track
+**Target Date**: TBD
+
+### Progress by Package
+
+| Package | Status | Progress |
+|---------|--------|----------|
+| @plcl/core | ✅ | 100% - 45+ components, theme system complete |
+| @plcl/core-types | ✅ | 100% - Type definitions stable |
+| @plcl/ui | ✅ | 100% - Shell component with 6 variants, custom apps API |
+| @plcl/ui-types | ✅ | 100% - Type definitions complete |
+| docs | 🟢 | 40% - Shell layout, navigation, getting started |
+| playground | 🟢 | 50% - Shell layout, component testing, theme toggle |
+
+---
+
+## 🗓️ Milestones
+
+### v0.1.0 - Core Components Stable
+- **Target**: TBD
+- **Status**: 🟡 Blocked by Documentation
+- **Progress**: 5/7 goals complete (71%)
+- **Blockers**: docs, playground
+- **Goals**:
+  - [x] Complete all core UI components (45+)
+  - [x] Implement theme system (ThemeProvider)
+  - [x] Type definitions for all components
+  - [x] Shell component with all variants
+  - [x] Custom apps support
+  - [ ] **Documentation site with examples** ← NEXT
+  - [ ] **Playground for testing** ← NEXT
+
+### v0.2.0 - Desktop UI Complete
+- **Target**: TBD
+- **Status**: 🟢 Mostly Complete (ahead of v0.1.0!)
+- **Progress**: 5/7 goals complete (71%)
+- **Blocked by**: v0.1.0 documentation
+- **Goals**:
+  - [x] Window management system complete
+  - [x] Desktop environment components
+  - [x] Settings app (theme, wallpaper, icons, dock)
+  - [x] App search functionality
+  - [x] Custom apps API
+  - [ ] Desktop app examples (after v0.1.0)
+  - [ ] Full documentation (after v0.1.0)
+
+### v1.0.0 - Production Ready
+- **Target**: TBD
+- **Status**: ⬜ Not Started
+- **Goals**:
+  - [ ] Full test coverage
+  - [ ] Performance optimization
+  - [ ] Accessibility audit
+  - [ ] npm publication
+
+---
+
+## 📦 Package Overview
+
+### @plcl-core
+Core component library with 45+ components:
+- **Inputs**: Button, Input, Textarea, Select, Checkbox, Switch, Radio, Slider
+- **Display**: Card, Badge, Avatar, Alert, Progress, Loading, Skeleton
+- **Layout**: Container, Box, Grid, Flex, Stack, Group, Divider, Spacer
+- **Navigation**: Menu, Burger, NavigationMenu, SidebarNavigation
+- **Overlay**: Modal, Drawer, Popover, Tooltip
+- **Data**: Accordion
+- **Interface**: Header, Footer, Sidebar, Main, AppIcon
+- **Typography**: Text, Title, Code, Blockquote, Kbd
+- **Theme**: ThemeProvider, useTheme
+
+### @plcl-ui
+Desktop UI layer:
+- **Shell** - Main component with 6 variants:
+  - `desktop` - Full OS-like environment
+  - `app` - Standard app layout
+  - `page` - Simple page layout
+  - `sidebar` - Sidebar navigation
+  - `web` - Iframe wrapper
+  - `window` - Individual window
+- **Internal Components**: Window, WindowManager, Settings, Search, Desktop, Wallpaper
+
+---
+
+## 📋 Cross-Project Dependencies
+
+- `@plcl/core-types` must be built before `@plcl/core`
+- `@plcl/ui-types` must be built before `@plcl/ui`
+- `@plcl/core` must be built before `@plcl/ui`
+- `docs` and `playground` depend on all library packages
+
+---
+
+## 📝 Notes
+
+- All packages use npm workspaces for dependency management
+- Build order: core-types → core → ui-types → ui → apps
+- Shell component consolidates all desktop functionality
+- Custom apps easily added via `customApps` prop
+
+---
