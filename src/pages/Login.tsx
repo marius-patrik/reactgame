@@ -123,13 +123,6 @@ export default function Login() {
             </p>
           </div>
         </div>
-
-        {/* Info card */}
-        <div className="mt-6 p-4 backdrop-blur-md bg-white/5 dark:bg-white/5 border border-white/10 rounded-lg">
-          <p className="text-xs text-muted-foreground text-center">
-            Demo credentials: test@example.com / password123
-          </p>
-        </div>
       </div>
     </div>
   );
