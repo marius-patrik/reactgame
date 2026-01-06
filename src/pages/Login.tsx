@@ -1,0 +1,136 @@
+import { useState } from "react";
+import { useLocation } from "wouter";
+import { signIn } from "@/lib/auth";
+import { IconMail, IconLock, IconArrowRight } from "@tabler/icons-react";
+
+export default function Login() {
+  const [, setLocation] = useLocation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setIsLoading(true);
+
+    const result = await signIn(email, password);
+
+    if (!result.success) {
+      setError(result.error);
+      setIsLoading(false);
+      return;
+    }
+
+    // Redirect to home on success
+    setLocation("/");
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-primary/5 flex items-center justify-center px-4">
+      {/* Animated background blobs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-300/20 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+      </div>
+
+      <div className="relative z-10 w-full max-w-md">
+        {/* Frosted glass card */}
+        <div className="backdrop-blur-xl bg-white/10 dark:bg-black/20 rounded-2xl border border-white/20 dark:border-white/10 p-8 shadow-2xl">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
+            <p className="text-muted-foreground">Sign in to your account to continue</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Email input */}
+            <div className="space-y-2">
+              <label htmlFor="email" className="block text-sm font-medium">
+                Email Address
+              </label>
+              <div className="relative">
+                <IconMail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full pl-10 pr-4 py-2.5 backdrop-blur-md bg-white/5 dark:bg-white/5 border border-white/20 dark:border-white/10 rounded-lg placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition"
+                />
+              </div>
+            </div>
+
+            {/* Password input */}
+            <div className="space-y-2">
+              <label htmlFor="password" className="block text-sm font-medium">
+                Password
+              </label>
+              <div className="relative">
+                <IconLock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground pointer-events-none" />
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="w-full pl-10 pr-4 py-2.5 backdrop-blur-md bg-white/5 dark:bg-white/5 border border-white/20 dark:border-white/10 rounded-lg placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition"
+                />
+              </div>
+            </div>
+
+            {/* Error message */}
+            {error && (
+              <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-sm">
+                {error}
+              </div>
+            )}
+
+            {/* Submit button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-2.5 px-4 rounded-lg font-medium transition bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {isLoading ? (
+                <>
+                  <div className="w-4 h-4 rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground animate-spin"></div>
+                  Signing in...
+                </>
+              ) : (
+                <>
+                  Sign In
+                  <IconArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </form>
+
+          {/* Sign up link */}
+          <div className="mt-6 pt-6 border-t border-white/10 dark:border-white/5 text-center">
+            <p className="text-sm text-muted-foreground">
+              Don't have an account?{" "}
+              <a
+                href="/signup"
+                className="text-primary hover:underline font-medium transition"
+              >
+                Create one now
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* Info card */}
+        <div className="mt-6 p-4 backdrop-blur-md bg-white/5 dark:bg-white/5 border border-white/10 rounded-lg">
+          <p className="text-xs text-muted-foreground text-center">
+            Demo credentials: test@example.com / password123
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

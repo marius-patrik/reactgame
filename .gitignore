@@ -10,3 +10,5 @@ dist/
 *.swo
 *~
 .vite
+.vercel
+.env*.local

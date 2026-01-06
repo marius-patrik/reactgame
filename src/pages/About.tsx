@@ -1,29 +1,91 @@
+import { useEffect, useState } from "react";
+
 export default function About() {
-  return (
-    <div className="space-y-6 max-w-3xl">
-      <h1 className="text-4xl font-bold">About This Project</h1>
+  const [readme, setReadme] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
 
-      <div className="space-y-4">
-        <section>
-          <h2 className="text-2xl font-semibold mb-2">Stack</h2>
-          <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-            <li>React 18 - UI library</li>
-            <li>TypeScript - Type safety</li>
-            <li>Rsbuild - Fast build tool</li>
-            <li>Tailwind CSS - Styling</li>
-            <li>shadcn/ui - Component library</li>
-            <li>Wouter - Lightweight routing</li>
-            <li>Supabase - Backend & Database</li>
-            <li>Vercel - Deployment</li>
-          </ul>
-        </section>
+  useEffect(() => {
+    // Load README.md content
+    fetch("/README.md")
+      .then((res) => res.text())
+      .then((text) => {
+        setReadme(text);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setReadme(
+          "# README\n\nFailed to load README.md. Please check the project documentation."
+        );
+        setIsLoading(false);
+      });
+  }, []);
 
-        <section>
-          <h2 className="text-2xl font-semibold mb-2">Getting Started</h2>
-          <p className="text-muted-foreground">
-            This project is configured and ready to use. Check the README for setup instructions.
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading documentation...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Simple markdown to HTML converter for basic formatting
+  const formatReadme = (md: string) => {
+    return md
+      .split("\n")
+      .map((line, idx) => {
+        if (line.startsWith("# ")) {
+          return (
+            <h1 key={idx} className="text-4xl font-bold mb-4 mt-8">
+              {line.slice(2)}
+            </h1>
+          );
+        }
+        if (line.startsWith("## ")) {
+          return (
+            <h2 key={idx} className="text-2xl font-semibold mb-4 mt-6">
+              {line.slice(3)}
+            </h2>
+          );
+        }
+        if (line.startsWith("### ")) {
+          return (
+            <h3 key={idx} className="text-xl font-semibold mb-2 mt-4">
+              {line.slice(4)}
+            </h3>
+          );
+        }
+        if (line.startsWith("- ")) {
+          return (
+            <li key={idx} className="ml-6 text-muted-foreground">
+              {line.slice(2)}
+            </li>
+          );
+        }
+        if (line.startsWith("`")) {
+          return (
+            <code key={idx} className="bg-black/20 px-2 py-1 rounded text-sm font-mono">
+              {line.slice(1, -1)}
+            </code>
+          );
+        }
+        if (line.trim() === "") {
+          return <br key={idx} />;
+        }
+        return (
+          <p key={idx} className="text-muted-foreground mb-2">
+            {line}
           </p>
-        </section>
+        );
+      });
+  };
+
+  return (
+    <div className="max-w-3xl animate-fade-in-up">
+      <div className="p-6 backdrop-blur-md bg-white/10 dark:bg-black/20 rounded-xl border border-white/20 dark:border-white/10 prose dark:prose-invert max-w-none">
+        <div className="space-y-4">{formatReadme(readme)}</div>
       </div>
     </div>
   );

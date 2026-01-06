@@ -14,7 +14,7 @@ Track all development tasks for this project. **MANDATORY**: All work must be tr
 
 ## 📍 Current Status
 
-<!-- Brief overview of where the project stands -->
+**Overall**: 🔄 Authentication & Theme Implementation In Progress
 
 ### Build Status
 
@@ -23,13 +23,14 @@ Track all development tasks for this project. **MANDATORY**: All work must be tr
 | Project Setup | ✅ | Rsbuild + React + TypeScript + Bun configured |
 | Tailwind CSS | ✅ | Configured with dark mode support |
 | shadcn/ui | ✅ | Ready for component usage |
-| Wouter Routing | ✅ | 3 pages + 404 configured (Home, About, NotFound) |
+| Wouter Routing | ✅ | 3 pages + 404 + login/signup configured |
 | Biomejs Linting | ✅ | Unified linter/formatter active |
 | Supabase Client | ✅ | REACT_APP_* environment variables configured |
-| VS Code Tasks | ✅ | 11 tasks configured (dev, build, lint, format, db, seed) |
-| Database Infrastructure | ✅ | Supabase PostgreSQL integration ready |
-| Seed System | ✅ | Seeding functions and CLI script ready |
-| Production Build | ✅ | 162.9 kB total (53.0 kB gzipped) |
+| Authentication | 🔄 | JWT auth, Login/SignUp pages, ProtectedRoute added |
+| Frosted Glass UI | ✅ | Glassmorphism theme applied to all pages |
+| Dark Mode | 🔄 | Theme detection and switching in progress |
+| Database Schema | ⬜ | Accounts table with player/admin roles pending |
+| Production Build | ✅ | Building successfully |
 
 ---
 
