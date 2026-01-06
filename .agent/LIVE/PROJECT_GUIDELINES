@@ -43,6 +43,7 @@ scripts/
 - ✅ Define proper interfaces for component props
 - ✅ Explicit return types on functions
 - ✅ Use `import type` for type-only imports
+- ✅ **Never use eslint-disable comments** - fix the underlying issue instead
 
 ### React
 
