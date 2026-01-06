@@ -91,7 +91,7 @@ function AppContent() {
         </nav>
       )}
 
-      <main className={!isAuthPage ? "max-w-7xl mx-auto px-4 py-8" : ""}>
+      <main>
         <Route path="/login">
           <Login />
         </Route>
