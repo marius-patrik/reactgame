@@ -1,4 +1,4 @@
-import { Router, Route, Link, useLocation, Redirect } from "wouter";
+import { Router, Route, Link, useLocation, Redirect, Switch } from "wouter";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
@@ -92,25 +92,27 @@ function AppContent() {
       )}
 
       <main>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <SignUp />
-        </Route>
-        <Route path="/">
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        </Route>
-        <Route path="/about">
-          <ProtectedRoute>
-            <About />
-          </ProtectedRoute>
-        </Route>
-        <Route>
-          <NotFound />
-        </Route>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+          </Route>
+          <Route path="/">
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          </Route>
+          <Route path="/about">
+            <ProtectedRoute>
+              <About />
+            </ProtectedRoute>
+          </Route>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
       </main>
     </Router>
   );
