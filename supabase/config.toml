@@ -1,0 +1,52 @@
+# A string used to distinguish different Supabase projects on the same host. Defaults to the
+# working directory name when running `supabase init`.
+project_id = "react-game-project"
+
+[api]
+# Port to use for the API URL.
+port = 54321
+# Schemas to expose in your API. Tables, views and stored procedures in this schema will get API
+# endpoints. public and storage are always included.
+schemas = ["public", "storage", "graphql_public"]
+# Extra schemas to add to the search_path of every request.
+extra_search_path = ["public", "extensions"]
+# The maximum number of rows returned from a view, table, or stored procedure.
+max_rows = 1000
+
+[db]
+# Port to use for the local database URL.
+port = 54322
+# The database major version to use. This has to be the same version as your production/staging database.
+major_version = 15
+
+[studio]
+# Port to use for Supabase Studio.
+port = 54323
+
+# Email testing configuration.
+# Emails are not sent to actual recipients.
+# Instead, they are logged to the container logs or can be viewed via Inbucket.
+[inbucket]
+# Port to use for Inbucket - a fake SMTP server for dev
+port = 54324
+# Enable email capture
+enabled = true
+
+[auth]
+# Enable signup via email
+enabled = true
+# The base site URL where your app is hosted
+site_url = "http://localhost:3001"
+# List of allowed redirect URIs
+additional_redirect_urls = ["http://localhost:3001"]
+# Authentication session JWT expiry in seconds
+jwt_expiry = 3600
+# Signin/signup via email is enabled by default
+enable_signup = true
+
+[auth.email]
+# Enable email-based authentication
+enable_signup = true
+# Disabling double confirmation means emails go to dev console
+double_confirm_changes = false
+enable_confirmations = false

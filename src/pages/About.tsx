@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Viewport } from "@/components/Viewport";
+import { Viewport } from "@/components/ui/Viewport";
 
 export default function About() {
   const [readme, setReadme] = useState<string>("");

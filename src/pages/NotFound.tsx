@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Viewport } from "@/components/Viewport";
+import { Viewport } from "@/components/ui/Viewport";
 
 export default function NotFound() {
   return (

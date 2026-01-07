@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLocation } from "wouter";
 import { signIn } from "@/lib/auth";
 import { IconMail, IconLock, IconArrowRight } from "@tabler/icons-react";
-import { Viewport } from "@/components/Viewport";
+import { Viewport } from "@/components/ui/Viewport";
 
 export default function Login() {
   const [, setLocation] = useLocation();

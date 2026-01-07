@@ -2,7 +2,7 @@ import { Router, Route, useLocation, Redirect, Switch } from "wouter";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
-import { LoadingScreen } from "@/components/LoadingScreen";
+import { LoadingScreen } from "@/components/ui/LoadingScreen";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Login from "@/pages/Login";
