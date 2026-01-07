@@ -61,7 +61,7 @@ export function Hotbar({ className }: HotbarProps) {
 
   return (
     <div className={cn(
-      "absolute bottom-6 left-1/2 -translate-x-1/2 z-50",
+      "relative z-50 pb-6 flex justify-center",
       "flex flex-col gap-2 items-center",
       className
     )}>

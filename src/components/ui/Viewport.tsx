@@ -33,7 +33,7 @@ export function Viewport({ children, className, contentClassName }: ViewportProp
       </div>
 
       {/* Hotbar (Footer with Stats) */}
-      <Hotbar className="z-50 bottom-6" />
+      <Hotbar />
     </div>
   );
 }

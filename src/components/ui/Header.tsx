@@ -46,7 +46,7 @@ export function Header() {
   };
 
   return (
-    <header className="pointer-events-auto absolute top-0 left-0 right-0 z-50">
+    <header className="pointer-events-auto relative z-50">
       <nav className="backdrop-blur-md bg-white/10 dark:bg-black/20 border-b border-white/20 dark:border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-3 flex gap-6 items-center justify-between">
           {/* Left: Navigation */}
